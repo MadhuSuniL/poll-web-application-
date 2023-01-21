@@ -1,0 +1,103 @@
+<html>
+<head>
+    <title>Register</title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<style>
+.login{
+    position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 50%;
+            height: auto;
+            padding: 2%;
+            background-color: skyblue;
+            
+            box-shadow: 2px 5px 10px 4px black;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            transform: translateX(-50%) translateY(-50%);
+}
+
+.login input{
+    border-radius: 20px;
+    box-shadow: 2px 3px 1px 2px black;
+    padding: 0.7%;
+    font-size: 20px;
+    margin: 1%;
+}
+
+@media only screen and (max-width:1082px){
+    .login{
+    position: fixed;
+            left: 50%;
+            top: 30%;
+            width: 90%;
+            height: auto;
+            padding: 2%;
+            background-color: skyblue;
+            
+            box-shadow: 2px 5px 10px 4px black;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            transform: translateX(-50%) translateY(-50%);
+}
+
+
+.login h1{
+    font-size: 80px;
+}
+.login h3{
+    font-size: 45px;
+}
+.login h5{
+    font-size: 40px;
+}
+
+
+.login input{
+    border-radius: 20px;
+    font-size: 50px;
+    margin: 15;
+    box-shadow: 2px 3px 1px 2px black;
+    padding: 0.7%;
+    padding-left: 1.7%;
+}
+
+}
+
+</style>
+</head>
+<body>
+    <div class="login">
+        <center>
+            <h1 style="color: white;">Polls area</h1>
+
+        <h3> Resgister</h3><br>
+        <form action="/register" method="post" onsubmit="return valid()">
+            {% csrf_token %}
+            <input id="fo" type="text" name="un" placeholder="Username" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <input type="number" name="no" placeholder="Phone " maxlength="10" minlength="10" required><br>
+            <input type="password" id="p1" name="ps" placeholder="Password" required><br>
+            <input type="password" id="p2" name="ps2" placeholder="Confirm Password" required><br>
+            <input type="submit" class="btn btn-primary" value=" Resgister " >
+            <h5>Your have account already please login <a href="/"> here..</a></h5>
+        </form>
+    </center>
+    </div>
+    <script>
+        function valid(){
+            p1 = document.getElementById('p1').value
+            p2 = document.getElementById('p2').value
+            if(p1==p2){
+                return true
+            }
+            else {
+                return false 
+            }
+            }
+    </script>
+</body>
+
+</html>

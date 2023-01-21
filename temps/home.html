@@ -1,0 +1,233 @@
+<html>
+    {% load static %}
+    <head>
+        <title>Home</title>
+       <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+       <link rel = "stylesheet" href = "{% static 'home.css' %}"/>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <style>
+    </style>
+    </head>
+    <body>
+    <header>
+        <div class="head">
+            <h1>Polls area</h1>
+            <div class="nav">
+                <a href="/poll/home">Home</a>
+                <a class="crtbtn btn">Create poll</a>
+                <a href="/poll/profile">Profile</a>
+                <h5 class="user">{{current_user}}</h5>
+            </div>
+            <div class="btnmenu">
+                <img id="menu" src="{% static 'menu.png' %}" width="70px" height="70px">
+            </div>
+        </header>    
+        <br>
+        <center>
+            {% for poll in polls %}
+            <div class="res">
+                <div class="q">
+                    <h3>{{poll.question}}</h3>
+                    <h5 style="float: right;margin: 1%;">by - {{poll.user}}</h5>
+                </div>
+                <button class="vote" onclick="vote('{{poll.id}}')" style="float: left;margin: 1%;">Vote</button>
+                <br><br><br>
+            </div><br>
+            {% endfor %}
+        
+    </center>
+
+        <!-- center response -->
+        <div class="center">
+            <center>
+            <h3 class="qu">What is your name?</h3>
+        </center>
+            <hr>
+                <input type="radio" id="opt1" name="rad" value="1">
+                 <label for="opt1" id="c1">windows</label><br>
+                 <input type="radio" id="opt2" name="rad" value="2">
+                 <label for="opt2" id="c2">OS</label><br>
+                 <input type="radio" id="opt3" name="rad" value="3">
+                 <label for="opt3" id="c3">linux</label><br>                
+                 <input type="radio" id="opt4" name="rad" value="4">
+                 <label for="opt4" id="c4">JavaScript</label>      <br> <br>
+                 <center>       
+            <button class="vote sub" style="width: 80%;">Vote</button>
+                    <br>
+                    <h1 class="text-danger btn">X</h1>
+        </center>
+        </div>
+
+
+
+        <div class="ans">
+            <center>
+            <h3 class="qu2">What is your name?</h3>
+        </center>
+            <hr>
+                 <center>       
+                    <div class="results">
+                        <h5 class="optans1">1.opt1(23)</h5>
+                        <progress class="progans1" min="0" max="100" value="20">Opt1</progress>
+                    </div>
+                    <div class="results">
+                        <h5 class="optans2">1.opt1(23)</h5>
+                        <progress class="progans2" min="0" max="100" value="20">Opt1</progress>
+                    </div>
+                    <div class="results">
+                        <h5 class="optans3">1.opt1(23)</h5>
+                        <progress class="progans3" min="0" max="100" value="20">Opt1</progress>
+                    </div>
+                    <div class="results">
+                        <h5 class="optans4">1.opt1(23)</h5>
+                        <progress class="progans4" min="0" max="100" value="20">Opt1</progress>
+                    </div>
+                    
+                    <h1 class="text-danger btn btn3">X</h1>
+        </center>
+        </div>
+
+
+
+
+
+
+        <div class="create">
+            <center>
+            <h3>Creating poll</h3>
+            <textarea id="ques" placeholder="' Question '"></textarea><br>
+            <input type="text" id="opti1" placeholder=" option 1 ">
+            <input type="text" id="opti2" placeholder=" option 2 "><br>
+            <input type="text" id="opti3" placeholder=" option 3 ">
+            <input type="text" id="opti4" placeholder=" option 4 "><br><br>
+            <button class="vote crt" style="width:50%">Create</button>
+            <br>
+                    <h1 class="text-danger btn btn2">X</h1>
+        </center>
+        </div>
+
+        </div>
+
+
+    <script>
+
+var current_id = ''
+$('.center').hide()
+$('.ans').hide()
+$('.create').hide()
+        if (window.innerWidth <= 1082){
+            $('.nav').hide()
+        }
+        else{
+            $('.nav').show()
+        }
+
+    $('#menu').click(function(){
+        $('.nav').slideToggle(200)
+    })
+
+    $('.text-danger').click(function(){
+        $('.center').slideUp()
+    })
+    $('.btn2').click(function(){
+        $('.create').slideUp()
+    })
+    $('.btn3').click(function(){
+        $('.ans').slideUp()
+    })
+
+    $('.crtbtn').click(function(){
+        $('.create').slideToggle()
+    })
+    //creating new poll
+
+    $('.crt').click(function(){
+        $.ajax({
+            url:'/poll/create_poll',
+            data:{
+                question : document.getElementById('ques').value,
+                opt1:document.getElementById('opti1').value,
+                opt2:document.getElementById('opti2').value,
+                opt3:document.getElementById('opti3').value,
+                opt4:document.getElementById('opti4').value,
+            },
+            success:function(res){
+                if(res.msg == 'Max'){
+                    alert('Max Polls Reached..!')
+                }
+                else{
+                    window.location.reload()
+                }
+            }
+        })
+    })
+
+    //get the poll
+    function vote(id){
+        $.ajax({
+            url:'/poll/get_poll/'+id,
+            success:function(res){
+                $('.qu').text(res.poll.question)
+                $('#c1').text(res.poll.option_1)
+                $('#c2').text(res.poll.option_2)
+                $('#c3').text(res.poll.option_3)
+                $('#c4').text(res.poll.option_4)
+                $('.center').slideToggle()
+                window.current_id = String(id)
+            }
+        })
+    } 
+
+
+    //submit the answer
+    $('.sub').click(function(){
+       o1 = document.getElementById('opt1')
+       o2 = document.getElementById('opt2')
+       o3 = document.getElementById('opt3')
+       o4 = document.getElementById('opt4')
+
+       var answer = 0
+        
+       if (o1.checked){
+            answer = 1
+        }
+        else if(o2.checked){
+            answer = 2
+        }
+        else if(o3.checked){
+            answer = 3
+        }
+        else{
+            answer = 4
+        }
+        $.ajax({
+            url:'/poll/handle_ans/'+window.current_id+"/"+answer,
+            // data:{
+            //     ans:answer
+            // },
+            success:function(poll){
+                $('.center').hide()
+                $('.qu2').text(poll.question)
+                $('.optans1').text(poll.option_1+"  ("+poll.option_1_votes+"%)")
+                $('.optans2').text(poll.option_2+"  ("+poll.option_2_votes+"%)")
+                $('.optans3').text(poll.option_3+"  ("+poll.option_3_votes+"%)")
+                $('.optans4').text(poll.option_4+"  ("+poll.option_4_votes+"%)")
+
+                $('.progans1').attr('value',String(poll.option_1_votes))
+                $('.progans2').attr('value',String(poll.option_2_votes))
+                $('.progans3').attr('value',String(poll.option_3_votes))
+                $('.progans4').attr('value',String(poll.option_4_votes))
+                
+                console.log(poll.option_1_votes,poll.option_2_votes,poll.option_3_votes,poll.option_4_votes)
+                $('.ans').show()
+            }
+        })
+
+    })
+    </script>    
+    </body>
+    
+    
+    
+    
+</html>

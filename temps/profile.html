@@ -1,0 +1,121 @@
+<html>
+{% load static %}
+<head>
+    <title>
+        Profile
+    </title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel = "stylesheet" href = "{% static 'profile.css' %}"/>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<style>
+     
+.profile{
+margin: 2%;
+padding: 1%;
+height: auto;
+box-shadow: 3px 2px 3px 5px black;
+border: 3px solid black;
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <div class="head">
+            <h1>Polls area</h1>
+            <div class="nav">
+                <a href="/poll/home">Home</a>
+                <!-- <a class="crtbtn btn">Create poll</a> -->
+                <!-- <a href="#">Profile</a> -->
+                <h5 class="user">{{current_user}}</h5>
+            </div>
+            <div class="btnmenu">
+                <img id="menu" src="{% static 'menu.png' %}" width="70px" height="70px">
+            </div>
+        </header>
+<div class="main">
+    <div class="profile">
+        <h3>Profile</h3><br>
+        <h5><b>Name</b> : {{current_user}}</h5>
+        <h5><b>Email</b> : {{email}}</h5>
+        <h5><b>Phone No</b> : {{ph_no}}</h5><br><br>
+        <button class="del btn btn-danger" onclick="window.location.href='/poll/del_24'">Delete old polls(24hrs before)</button><br><br>
+        
+    </div><br><br><br><br><br>
+    <div class="polls">
+        <h2 style="float: right;font-size: 30px;">My Polls</h2>
+        <br>
+        <br>
+        <br>
+        {% for poll in polls %}
+        <div class="p">
+            <center>
+            <h3 class="qq">{{poll.question}}</h3>
+            <hr>
+        </center>
+            <div class="opts">
+                <div class="results">
+                    <h5>1.{{poll.option_1}}</h5>
+                    <progress min="0" max="100" value="{{poll.option_1_votes}}"></progress>
+                </div>
+                <div class="results">
+                    <h5>2.{{poll.option_2}}</h5>
+                    <progress min="0" max="100" value="{{poll.option_2_votes}}"></progress>
+                </div>
+                <div class="results">
+                    <h5>3.{{poll.option_3}}</h5>
+                    <progress min="0" max="100" value="{{poll.option_3_votes}}"></progress>
+                </div>
+                <div class="results">
+                    <h5>4.{{poll.option_4}}</h5>
+                    <progress min="0" max="100" value="{{poll.option_4_votes}}"></progress>
+                </div>
+                <button class="btn btn-danger" onclick="window.location.href='/poll/del_poll/{{poll.id}}'" style="float: right;margin-right: 2%;">delete</button><br><br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+           var current_id = 0
+$('.center').hide()
+        if (window.innerWidth <= 1082){
+            $('.nav').hide()
+        }
+        else{
+            $('.nav').show()
+        }
+
+    $('#menu').click(function(){
+        $('.nav').slideToggle(200)
+    })
+
+    $('.text-danger').click(function(){
+        $('.center').slideUp()
+    })
+    $('.btn2').click(function(){
+        $('.create').slideUp()
+    })
+
+    $('.crtbtn').click(function(){
+        $('.create').slideToggle()
+    })
+ 
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

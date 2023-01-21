@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<style>
+.login{
+    position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 50%;
+            height: auto;
+            padding: 2%;
+            background-color: skyblue;
+            
+            box-shadow: 2px 5px 10px 4px black;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            transform: translateX(-50%) translateY(-50%);
+}
+
+.login input{
+    border-radius: 20px;
+    font-size: 20px;
+    margin: 15;
+    box-shadow: 2px 3px 1px 2px black;
+    padding: 0.7%;
+}
+
+@media only screen and (max-width:1082px){
+    .login{
+    position: fixed;
+            left: 50%;
+            top: 30%;
+            width: 90%;
+            height: auto;
+            padding: 2%;
+            background-color: skyblue;
+            
+            box-shadow: 2px 5px 10px 4px black;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            transform: translateX(-50%) translateY(-50%);
+}
+.login h1{
+    font-size: 80px;
+}
+.login h3{
+    font-size: 45px;
+}
+.login h5{
+    font-size: 40px;
+}
+
+
+.login input{
+    border-radius: 20px;
+    font-size: 60px;
+    margin: 15;
+    box-shadow: 2px 3px 1px 2px black;
+    padding: 0.7%;
+    padding-left: 1.7%;
+
+}
+}
+</style>
+</head>
+<body>
+    <div class="login">
+        <center>
+            <h1 style="color: white;">Polls area</h1>
+
+        <h3> Login</h3><br>
+        <form action="login" method="post">
+            {% csrf_token %}
+            <input type="text" name="un" placeholder="Username" required><br>
+            <input type="password" name="ps" placeholder="Password" required><br><br>
+            <input type="submit" class="btn btn-primary" value=" Log in ">
+            <h5>Dont have account please register <a href="/register_page"> here..</a></h5>
+        </form>
+    </center>
+    </div>
+</body>
+
+</html>
