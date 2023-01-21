@@ -2,7 +2,7 @@
 
 This site is deployed in pytohnanywhere site you can check this site with this link
 
-                        # https://pollarea.pythonanywhere.com/
+                        https://pollarea.pythonanywhere.com/
 
 API DETAILS
 
