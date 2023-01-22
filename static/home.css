@@ -58,7 +58,7 @@ body{
 
 .res{
     border: 3px solid black;
-    width: 80%;
+    width: 95%;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 1%;
@@ -66,7 +66,7 @@ body{
 }
 .res:hover{
     border: 3px outset white;
-    width: 80%;
+    width: 95%;
     padding: 1%;
     background-color: black;
     color: white;
