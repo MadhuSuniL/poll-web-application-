@@ -258,20 +258,25 @@ margin-left: -15%;
 /* result...... */
 .res{
     border: 3px solid black;
-    width: 80%;
+    width: 95%;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 1%;
     box-shadow: 2px 3px 1px 4px black;
 
 }
+.res h3{
+    font-size: 45px;
+}
+
+.res h5{
+    font-size: 25px;
+}
 .res:hover{
     border: 3px outset white;
-    width: 80%;
     padding: 1%;
     background-color: black;
     color: white;
-    font-size: 40px;
 }
 .res:hover .q{
     border: 3px solid white;
@@ -359,10 +364,19 @@ margin-left: -15%;
     border-top-right-radius: 50px;
     border-bottom-left-radius: 50px;
     transform: translateX(-50%) translateY(-50%);
+} 
+   .ans h3{
+    font-size: 50px;
 }
-.ans h3{
+
+.ans h5{
     font-size: 40px;
 }
+.ans progress{
+    height: 50px;
+    margin-left: 1%;
+}
+
 .ans input{
     margin-left: 10%;
     font-size: 28px;
